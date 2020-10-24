@@ -54,4 +54,11 @@ Route::get('/contact', 'ContactController@contact');
 
 Auth::routes();
 
-Route::get('/home', 'BerandaController@index');//->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/manage', 'Home1Controller@index')->name('manage');
+Route::get('/article/add','Home1Controller@add');
+Route::post('/article/create','Home1Controller@create');
+Route::get('/article/edit/{id}','Home1Controller@edit');
+Route::post('/article/update/{id}','Home1Controller@update');
+Route::get('/article/delete/{id}','Home1Controller@delete');

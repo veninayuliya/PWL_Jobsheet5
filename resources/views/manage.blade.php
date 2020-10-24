@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Rekomendasi Tempat Wisata di Pasuruan 2020</title>
+  <title>Kelola</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -34,7 +34,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{'/home'}}">Home</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{{'/all'}}">Wisata
               <span class="sr-only">(current)</span>
             </a>
@@ -42,7 +42,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{'/contact'}}">Contact</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="{{'/manage'}}">Kelola</a>
           </li>
           <li class="nav-item">
@@ -67,84 +67,47 @@
 
       <!-- Blog Entries Column -->
       <div class="col-md-8">
-
-        <h1 class="my-4">Rekomendasi Tempat Wisata di Pasuruan 2020
-          <small></small>
-        </h1>
+      <div class="card">
+      <div class="card-header text-center">
+      <h1 class="my-4">Daftar Artikel</h1>
+      </div>
+        <a href="article/add" class="btn btn-primary">Tambah Data</a>
+        <br>
+        <br>
 
         <!-- Blog Post -->
-        @foreach($articles as $artikel)
-        <div class="card mb-4">
-          <img class="card-img-top" src="{{$artikel->featured_image}}" alt="Card image cap">
-          <div class="card-body">
-            <h2 class="card-title">{{$artikel->title}}</h2>
-            <p class="card-text">{{Str::limit($artikel->content, 200, '[...]') }}</p>
-            <a href="{{'/find/'.$artikel->id}}" class="btn btn-primary">Baca Selengkapnya &rarr;</a>
-          </div>
-          <!--<div class="card-footer text-muted">
-            Posted on October 4, 2020 by
-            <a href="#">Venina Yuliya</a>
-          </div>-->
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Buka</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($articles as $artikel)
+                <tr>
+                    <td>{{$artikel->id}}</td>
+                    <td>{{$artikel->title}}</td>
+                    <td>{{$artikel->open}}</td>
+                    <td>
+                        <a href="/article/edit/{{$artikel->id}}" class="badge badge-warning">Edit</a>
+                        <a href="/article/delete/{{$artikel->id}}" class="badge badge-danger">Hapus</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        
+        </table>
         </div>
-        @endforeach
-
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-          <!--<li class="page-item disabled">
-            <a class="page-link" href="#">&larr; Prev</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="">Next &rarr;</a>
-          </li>-->
-        </ul>
-
       </div>
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
 
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Daftar Wisata</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-9">
-              @foreach($articles as $artikel)
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="{{'/find/'.$artikel->id}}">{{$artikel->title}}</a>
-                  </li>
-                </ul>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      </div>
+       
         
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Tentang Website</h5>
-          <div class="card-body">
-            <h6>-Pemrograman Web Lanjut-</h6>
-            <h6>Nama : Venina Yuliya</h6>
-            <h6>No.  : 28</h6>
-            <h6>Kelas: MI 2F</h6>
-          </div>
-        </div>
 
       </div>
 
