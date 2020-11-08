@@ -62,3 +62,10 @@ Route::post('/article/create','Home1Controller@create');
 Route::get('/article/edit/{id}','Home1Controller@edit');
 Route::post('/article/update/{id}','Home1Controller@update');
 Route::get('/article/delete/{id}','Home1Controller@delete');
+
+Route::get('/kelolauser', 'UserController@index')->name('kelolauser');
+Route::get('/user/add', 'UserController@add');
+Route::post('/user/create','UserController@create');
+Route::get('/user/edit/{id}', 'UserController@edit');
+Route::post('/user/update/{id}', 'UserController@update');
+Route::get('user/delete/{id}', 'UserController@delete');

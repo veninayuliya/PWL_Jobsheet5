@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
-class Home1Controller extends Controller
+use Illuminate\Support\Facades\Gate;
+class Home1Controller extends Controller//halaman u/ semua artikel
 {
     public function getAll(){
         $articles = Article::all();
@@ -15,13 +16,25 @@ class Home1Controller extends Controller
         });
     }
     public function index(){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         $articles = Article::all();
         return view('manage',['articles' => $articles]);
     }
     public function add(){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         return view('addarticle');
     }
     public function create(Request $request){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         Article::create([
             'title'=> $request->title,
             'content'=> $request->content,
@@ -34,11 +47,20 @@ class Home1Controller extends Controller
         return redirect('/manage');
     }
     public function edit($id){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         $articles = Article::find($id);
         return view('editarticle',['articles'=>$articles]);
     }
     public function update($id, Request $request){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         $articles = Article::find($id);
+        
         $articles->title = $request->title;
         $articles->content = $request->content;
         $articles->address = $request->address;
@@ -51,8 +73,13 @@ class Home1Controller extends Controller
 
     }
     public function delete($id){
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-articles')) return $next($request);
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
         $articles = Article::find($id);
         $articles->delete();
         return redirect('/manage');
     }
+    
 }

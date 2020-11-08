@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Rekomendasi Tempat Wisata di Pasuruan 2020</title>
+  <title>Tambah User</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -33,13 +33,13 @@
         <ul class="navbar-nav ml-auto">
         <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
           @can('user-display')
-            <a class="nav-link" href="{{ route('home') }}">Home
+            <a class="nav-link" href="{{ url('/home') }}">Home
               <span class="sr-only">(current)</span>
             </a>
           @endcan
           </li>
 
-          <li class="nav-item active{{ Route::is('all') ? 'active' : '' }}">
+          <li class="nav-item {{ Route::is('all') ? 'active' : '' }}">
           @can('user-display')
             <a class="nav-link" href="{{ url('/all') }}">Wisata</a>
           @endcan
@@ -50,11 +50,19 @@
             <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
           @endcan
           </li>
+
           <li class="nav-item {{ Route::is('manage') ? 'active' : ''}}">
             @can('manage-articles')
-            <a class="nav-link" href="{{ url('/manage') }}">Kelola</a>
+            <a class="nav-link" href="{{ url('/manage') }}">Artikel</a>
             @endcan
           </li>
+
+          <li class="nav-item active{{ Route::is('kelolauser') ? 'active' : ''}}">
+            @can('manage-articles')
+            <a class="nav-link" href="{{ url('/kelolauser') }}">User</a>
+            @endcan
+          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{{route ('logout') }}"
               onclick="event.preventDefault();
@@ -77,26 +85,40 @@
 
       <!-- Blog Entries Column -->
       <div class="col-md-8">
-
-        <h1 class="my-4">Rekomendasi Tempat Wisata di Pasuruan 2020
-          <small></small>
-        </h1>
+      <div class="card">
+        <div class="card-header">
+        <h1 class="my-4">Tambah User</h1>
 
         <!-- Blog Post -->
-        @foreach($articles as $artikel)
-        <div class="card mb-4">
-          <img class="card-img-top" src="{{$artikel->featured_image}}" alt="Card image cap">
-          <div class="card-body">
-            <h2 class="card-title">{{$artikel->title}}</h2>
-            <p class="card-text">{{Str::limit($artikel->content, 200, '[...]') }}</p>
-            <a href="{{'/find/'.$artikel->id}}" class="btn btn-primary">Baca Selengkapnya &rarr;</a>
-          </div>
-          <!--<div class="card-footer text-muted">
-            Posted on October 4, 2020 by
-            <a href="#">Venina Yuliya</a>
-          </div>-->
+        <form action="/user/create" method="post">
+        @csrf
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="varchar" class="form-control" required="required" name="name"><br>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="varchar" class="form-control" required="required" name="email"><br>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="varchar" class="form-control" required="required" name="password"><br>
+            </div>
+            <div class="form-group">
+                <label for="roles">Roles</label>
+                <input type="varchar" class="form-control" required="required" name="roles"><br>
+            </div>
+    
+            <div class="text-center">
+                <button type="submit" name="add" class="btn btn-primary float-right">Tambah Data</button><br><br>
+      </div>
+
+
+            </div>
+            </form>
         </div>
-        @endforeach
+        </div>
+
 
         <!-- Pagination -->
         <ul class="pagination justify-content-center mb-4">
@@ -112,49 +134,6 @@
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
-
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Daftar Wisata</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-9">
-              @foreach($articles as $artikel)
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="{{'/find/'.$artikel->id}}">{{$artikel->title}}</a>
-                  </li>
-                </ul>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      </div>
-        
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Tentang Website</h5>
-          <div class="card-body">
-            <h6>-Pemrograman Web Lanjut-</h6>
-            <h6>Nama : Venina Yuliya</h6>
-            <h6>No.  : 28</h6>
-            <h6>Kelas: MI 2F</h6>
-          </div>
-        </div>
 
       </div>
 

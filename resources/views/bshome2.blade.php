@@ -32,19 +32,29 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{'/home'}}">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{{'/all'}}">Wisata
+        <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
+          @can('user-display')
+            <a class="nav-link" href="{{ route('home') }}">Home
               <span class="sr-only">(current)</span>
             </a>
+          @endcan
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'/contact'}}">Contact</a>
+
+          <li class="nav-item active {{ Route::is('all') ? 'active' : '' }}">
+          @can('user-display')
+            <a class="nav-link" href="{{ url('/all') }}">Wisata</a>
+          @endcan
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'/manage'}}">Kelola</a>
+
+          <li class="nav-item {{ Route::is('contact') ? 'active' : '' }}">
+          @can('user-display')
+            <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
+          @endcan
+          </li>
+          <li class="nav-item {{ Route::is('manage') ? 'active' : ''}}">
+            @can('manage-articles')
+            <a class="nav-link" href="{{ url('/manage') }}">Kelola</a>
+            @endcan
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route ('logout') }}"
