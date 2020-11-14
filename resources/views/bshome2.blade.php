@@ -85,7 +85,7 @@
 
         <!-- Blog Post -->
         <div class="card mb-4">
-          <img class="card-img-top" src="{{$articles->featured_image}}" alt="Card image cap">
+          <img width="150px" src="{{asset('storage/'.$articles->featured_image)}}" class="card-img-top" alt="Card image cap">
           <div class="card-body">
             <h2 class="card-title"></h2>
             <p class="card-text">{{$articles->content}}</p>

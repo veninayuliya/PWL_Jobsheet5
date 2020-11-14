@@ -69,3 +69,5 @@ Route::post('/user/create','UserController@create');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::post('/user/update/{id}', 'UserController@update');
 Route::get('user/delete/{id}', 'UserController@delete');
+
+Route::get('article/cetak_pdf', 'Home1Controller@cetak_pdf');

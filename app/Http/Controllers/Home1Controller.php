@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Gate;
+use PDF;
 class Home1Controller extends Controller//halaman u/ semua artikel
 {
     public function getAll(){
@@ -35,6 +36,9 @@ class Home1Controller extends Controller//halaman u/ semua artikel
             if(Gate::allows('manage-articles')) return $next($request);
             abort(403, 'Anda tidak memiliki cukup hak akses');
         });
+        if($request->file('image')){
+            $image_name = $request->file('image')->store('images','public');
+        }
         Article::create([
             'title'=> $request->title,
             'content'=> $request->content,
@@ -42,7 +46,7 @@ class Home1Controller extends Controller//halaman u/ semua artikel
             'price'=> $request->price, 
             'open'=> $request->open,
             'detail'=> $request->detail,
-            'featured_image'=> $request->image
+            'featured_image'=> $image_name,
         ]);
         return redirect('/manage');
     }
@@ -67,7 +71,14 @@ class Home1Controller extends Controller//halaman u/ semua artikel
         $articles->price = $request->price;
         $articles->open = $request->open;
         $articles->detail = $request->detail;
-        $articles->featured_image = $request->image;
+
+        if($articles->featured_image && 
+        file_exists(storage_path('app/public/'. $articles->featured_image))){
+            \Storage::delete('public/'.$articles->featured_image);
+        }
+        $image_name = $request->file('image')->store('images', 'public');
+        $articles->featured_image = $image_name;
+
         $articles->save();
         return redirect('/manage');
 
@@ -80,6 +91,11 @@ class Home1Controller extends Controller//halaman u/ semua artikel
         $articles = Article::find($id);
         $articles->delete();
         return redirect('/manage');
+    }
+    public function cetak_pdf(){
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles_pdf', ['articles'=>$articles]);
+        return $pdf->stream();
     }
     
 }

@@ -90,6 +90,7 @@
       <h1 class="my-4">Daftar Artikel</h1>
       </div>
         <a href="article/add" class="btn btn-primary">Tambah Data</a>
+        <a href="/article/cetak_pdf" class="btn btn-primary" target="_blank">Cetak PDF</a>
         <br>
         <br>
 

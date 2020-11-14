@@ -72,7 +72,7 @@
         <h1 class="my-4">Ubah Data</h1>
 
         <!-- Blog Post -->
-        <form action="/article/update/{{$articles->id}}" method="post">
+        <form action="/article/update/{{$articles->id}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <input type="hidden" name="id" value="{{$articles->id}}"><br>
         <div class="form-group">
@@ -101,7 +101,8 @@
             </div>
             <div class="form-group">
                 <label for="image">Feature Image</label>
-                <input type="varchar" class="form-control" required="required" name="image" value="{{$articles->featured_image}}"><br>
+                <input type="file" class="form-control" required="required" name="image" value="{{$articles->featured_image}}">
+                <img width="150px" src="{{asset('storage/'.$articles->featured_image)}}"><br>
             </div>
             
             <button type="submit" name="edit" class="btn btn-primary float-right">Ubah Data</button>

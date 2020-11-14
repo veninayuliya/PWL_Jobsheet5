@@ -72,7 +72,7 @@
         <h1 class="my-4">Tambah Data</h1>
 
         <!-- Blog Post -->
-        <form action="/article/create" method="post">
+        <form action="/article/create" method="post" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
                 <label for="title">Judul</label>
@@ -100,7 +100,7 @@
             </div>
             <div class="form-group">
                 <label for="image">Feature Image</label>
-                <input type="varchar" class="form-control" required="required" name="image"><br>
+                <input type="file" class="form-control" required="required" name="image"><br>
             </div>
     
             <div class="text-center">
