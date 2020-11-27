@@ -84,7 +84,7 @@
     <div class="row">
 
       <!-- Blog Entries Column -->
-      <div class="col-md-8">
+      <div class="col-md-10">
       <div class="card">
       <div class="card-header text-center">
       <h1 class="my-4">Daftar Artikel</h1>
@@ -100,7 +100,7 @@
                 <tr>
                     <th>No</th>
                     <th>Judul</th>
-                    <th>Buka</th>
+                    <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -109,7 +109,9 @@
                 <tr>
                     <td>{{$artikel->id}}</td>
                     <td>{{$artikel->title}}</td>
-                    <td>{{$artikel->open}}</td>
+                    <td>
+                    <img width="150px" src="{{('storage/'.$artikel->featured_image)}}" class="card-img-top" alt="Card image cap">
+                    </td>
                     <td>
                         <a href="/article/edit/{{$artikel->id}}" class="badge badge-warning">Edit</a>
                         <a href="/article/delete/{{$artikel->id}}" class="badge badge-danger">Hapus</a>

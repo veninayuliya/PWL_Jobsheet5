@@ -90,7 +90,7 @@
         <h1 class="my-4">Ubah User</h1>
 
         <!-- Blog Post -->
-        <form action="/user/update/{{$users->id}}" method="post">
+        <form action="/user/update/{{$users->id}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <input type="hidden" name="id" value="{{$users->id}}"><br>
         <div class="form-group">
@@ -108,6 +108,11 @@
         <div class="form-group">
                 <label for="roles">Roles</label>
                 <input type="varchar" class="form-control" required="required" name="roles" value="{{$users->roles}}"><br>
+        </div>
+        <div class="form-group">
+                <label for="image">Feature Image</label>
+                <input type="file" class="form-control" required="required" name="image" value="{{$users->featured_image}}">
+                <img width="150px" src="{{asset('storage/'.$users->featured_image)}}"><br>
         </div>
             
             <button type="submit" name="edit" class="btn btn-primary float-right">Ubah Data</button>

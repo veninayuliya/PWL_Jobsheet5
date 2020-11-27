@@ -85,12 +85,13 @@
     <div class="row">
 
       <!-- Blog Entries Column -->
-      <div class="col-md-8">
+      <div class="col-md-10">
       <div class="card">
       <div class="card-header text-center">
       <h1 class="my-4">Daftar User</h1>
       </div>
         <a href="user/add" class="btn btn-primary">Tambah User</a>
+        <a href="/user/cetak_pdf" class="btn btn-primary" target="_blank">Cetak PDF</a>
         <br>
         <br>
 
@@ -102,6 +103,7 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Roles</th>
+                    <th>Images</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -112,6 +114,9 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->roles}}</td>
+                    <td>
+                    <img width="150px" src="{{('storage/'.$user->featured_image)}}" class="card-img-top" alt="Card image cap">
+                    </td>
                     <td>
                         <a href="/user/edit/{{$user->id}}" class="badge badge-warning">Edit</a>
                         <a href="/user/delete/{{$user->id}}" class="badge badge-danger">Hapus</a>

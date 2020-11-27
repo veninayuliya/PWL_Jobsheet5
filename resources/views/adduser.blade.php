@@ -90,7 +90,7 @@
         <h1 class="my-4">Tambah User</h1>
 
         <!-- Blog Post -->
-        <form action="/user/create" method="post">
+        <form action="/user/create" method="post" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
                 <label for="name">Nama</label>
@@ -107,6 +107,10 @@
             <div class="form-group">
                 <label for="roles">Roles</label>
                 <input type="varchar" class="form-control" required="required" name="roles"><br>
+            </div>
+            <div class="form-group">
+                <label for="image">Feature Image</label>
+                <input type="file" class="form-control" required="required" name="image"><br>
             </div>
     
             <div class="text-center">
